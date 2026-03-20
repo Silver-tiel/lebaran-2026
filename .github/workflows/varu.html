@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minal Aidin Wal Faizin 🌙</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #f5c518;
+    --gold2: #e6a817;
+    --teal: #0d7377;
+    --teal2: #14a085;
+    --dark: #0a2a2b;
+    --cream: #fdf6e3;
+    --soft: #d4a843;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* === STARRY SKY BG === */
+  #sky {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.2; transform: scale(1); }
+    50%     { opacity: 1;   transform: scale(1.4); }
+  }
+
+  /* === FLOATING ICONS === */
+  .float-icon {
+    position: absolute;
+    animation: floatUp linear infinite;
+    opacity: 0;
+    pointer-events: none;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(-10deg); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(-10vh) rotate(10deg); opacity: 0; }
+  }
+
+  /* === MOSQUE SILHOUETTE === */
+  .mosque-wrap {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 700px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+  }
+  .mosque-wrap svg { width: 100%; display: block; }
+
+  /* === CARD === */
+  .card {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(160deg, #0e3535 0%, #0a2a2b 100%);
+    border-radius: 28px;
+    padding: 36px 32px 32px;
+    max-width: 430px;
+    width: 92%;
+    text-align: center;
+    border: 2px solid rgba(245,197,24,0.35);
+    box-shadow:
+      0 0 0 1px rgba(245,197,24,0.1),
+      0 24px 70px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(245,197,24,0.2);
+    animation: popIn 0.7s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes popIn {
+    from { transform: scale(0.75) translateY(30px); opacity: 0; }
+    to   { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  /* Gold ornament lines */
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    justify-content: center;
+  }
+  .ornament-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .ornament-diamond {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    border-radius: 1px;
+  }
+
+  /* Moon & character */
+  .moon-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+  .moon-bg {
+    font-size: 4.5rem;
+    animation: moonGlow 3s ease-in-out infinite;
+    display: block;
+    filter: drop-shadow(0 0 18px rgba(245,197,24,0.6));
+  }
+  @keyframes moonGlow {
+    0%,100% { filter: drop-shadow(0 0 14px rgba(245,197,24,0.5)) brightness(1); }
+    50%     { filter: drop-shadow(0 0 28px rgba(245,197,24,0.9)) brightness(1.1); }
+  }
+
+  #character {
+    font-size: 3rem;
+    position: absolute;
+    bottom: -6px;
+    right: -10px;
+    animation: charWobble 2.5s ease-in-out infinite;
+  }
+  @keyframes charWobble {
+    0%,100% { transform: rotate(-8deg) scale(1); }
+    50%     { transform: rotate(8deg) scale(1.08); }
+  }
+  #character.crying { animation: charShake 0.35s ease infinite; }
+  @keyframes charShake {
+    0%,100% { transform: translateX(0); }
+    30%     { transform: translateX(-5px) rotate(-6deg); }
+    70%     { transform: translateX(5px) rotate(6deg); }
+  }
+  #character.happy { animation: charJump 0.5s ease infinite; }
+  @keyframes charJump {
+    0%,100% { transform: translateY(0) scale(1); }
+    50%     { transform: translateY(-10px) scale(1.12); }
+  }
+
+  /* Arabic / title text */
+  .arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 12px rgba(245,197,24,0.4);
+  }
+
+  h1 {
+    font-family: 'Nunito', sans-serif;
+    color: var(--cream);
+    font-size: 1.65rem;
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  h1 span { color: var(--gold); }
+
+  .subtitle {
+    color: #8ecfcf;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+
+  /* Progress */
+  .prog-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--soft);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .progress-wrap {
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px;
+    height: 8px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(245,197,24,0.15);
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal2), var(--gold));
+    border-radius: 99px;
+    width: 60%;
+    transition: width 0.5s ease;
+  }
+
+  /* Buttons */
+  .btn-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-yes {
+    background: linear-gradient(135deg, var(--gold2), var(--gold));
+    color: var(--dark);
+    border: none;
+    border-radius: 99px;
+    padding: 13px 28px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(245,197,24,0.4);
+    transition: transform 0.1s, box-shadow 0.1s;
+    letter-spacing: 0.3px;
+  }
+  .btn-yes:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 10px 28px rgba(245,197,24,0.55);
+  }
+  .btn-yes:active { transform: scale(0.97); }
+
+  .btn-no {
+    background: rgba(13,115,119,0.2);
+    color: #8ecfcf;
+    border: 2px solid rgba(142,207,207,0.4);
+    border-radius: 99px;
+    padding: 13px 28px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: fixed;
+    z-index: 999;
+    white-space: nowrap;
+    backdrop-filter: blur(6px);
+  }
+
+  /* Confetti */
+  .confetti {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    animation: confettiFall 2s ease-out forwards;
+    border-radius: 2px;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(540deg); opacity: 0; }
+  }
+
+  /* Win screen */
+  #win-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .win-moon { font-size: 3.5rem; animation: moonGlow 2s infinite; }
+  #win-screen h2 {
+    font-family: 'Amiri', serif;
+    color: var(--gold);
+    font-size: 1.6rem;
+    text-shadow: 0 0 16px rgba(245,197,24,0.5);
+  }
+  #win-screen .win-sub {
+    color: #8ecfcf;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+  }
+  #win-screen .hadith {
+    background: rgba(245,197,24,0.08);
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 14px;
+    padding: 12px 16px;
+    color: var(--soft);
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-top: 6px;
+  }
+
+  /* Sparkle */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 1.4rem;
+    animation: sparkleAnim 1s ease-out forwards;
+    z-index: 9999;
+  }
+  @keyframes sparkleAnim {
+    0%   { transform: scale(0) rotate(0deg); opacity: 1; }
+    50%  { transform: scale(1.6) rotate(180deg); opacity: 1; }
+    100% { transform: scale(0) rotate(360deg) translateY(-60px); opacity: 0; }
+  }
+
+  /* Tag */
+  .tag {
+    display: inline-block;
+    background: rgba(245,197,24,0.12);
+    color: var(--gold);
+    font-size: 0.7rem;
+    font-weight: 800;
+    border-radius: 99px;
+    padding: 4px 14px;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid rgba(245,197,24,0.25);
+  }
+
+  /* Countdown strip */
+  .eid-strip {
+    background: rgba(245,197,24,0.08);
+    border: 1px solid rgba(245,197,24,0.18);
+    border-radius: 10px;
+    padding: 8px 14px;
+    margin-bottom: 16px;
+    font-size: 0.8rem;
+    color: var(--soft);
+    font-weight: 700;
+  }
+  .eid-strip span { color: var(--gold); font-size: 1rem; font-weight: 900; }
+</style>
+</head>
+<body>
+
+<div id="sky"></div>
+
+<!-- Mosque silhouette -->
+<div class="mosque-wrap">
+  <svg viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg" fill="#f5c518">
+    <ellipse cx="400" cy="100" rx="90" ry="80"/>
+    <rect x="310" y="100" width="180" height="120"/>
+    <ellipse cx="240" cy="130" rx="55" ry="45"/>
+    <rect x="185" y="130" width="110" height="90"/>
+    <ellipse cx="560" cy="130" rx="55" ry="45"/>
+    <rect x="505" y="130" width="110" height="90"/>
+    <rect x="100" y="60" width="30" height="160"/>
+    <ellipse cx="115" cy="60" rx="18" ry="28"/>
+    <rect x="670" y="60" width="30" height="160"/>
+    <ellipse cx="685" cy="60" rx="18" ry="28"/>
+    <rect x="0" y="215" width="800" height="10"/>
+    <ellipse cx="400" cy="120" rx="22" ry="30" fill="#0a2a2b"/>
+    <ellipse cx="240" cy="148" rx="14" ry="18" fill="#0a2a2b"/>
+    <ellipse cx="560" cy="148" rx="14" ry="18" fill="#0a2a2b"/>
+  </svg>
+</div>
+
+<!-- Card -->
+<div class="card" id="mainCard">
+  <div id="main-content">
+    <span class="tag">🌙 Ramadan Mubarak</span>
+
+    <div class="ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line"></div>
+    </div>
+
+    <div class="moon-wrap">
+      <span class="moon-bg">🌙</span>
+      <span id="character">😔</span>
+    </div>
+
+    <p class="arabic">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+    <h1>Di Bulan <span>Ramadan</span> yang Suci Ini…</h1>
+
+    <div class="eid-strip" id="eidStrip">⏳ Sebentar lagi Lebaran! Yuk bersihkan hati 🤲</div>
+
+    <p class="subtitle" id="subtitle">
+      Aku minta maaf atas semua salah & khilafku.<br>
+      Mumpung bulan suci, maafin aku ya? 🙏
+    </p>
+
+    <div class="prog-label">
+      <span>Keikhlasan hatimu</span>
+      <span id="progPct">60%</span>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-yes" onclick="maafin()">✨ Iya, aku maafkan</button>
+      <button class="btn-no" id="btnNo" onclick="gasMauh()">Belum mau…</button>
+    </div>
+  </div>
+
+  <div id="win-screen">
+    <div class="win-moon">🌙</div>
+    <div class="ornament" style="margin-bottom:8px">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line"></div>
+    </div>
+    <h2>Jazakallahu Khairan! 🤲</h2>
+    <p class="win-sub">
+      Alhamdulillah… hatiku lega banget.<br>
+      Semoga kita semua diampuni Allah SWT<br>
+      dan selalu dalam lindungan-Nya. 🕌
+    </p>
+    <div class="hadith">
+      "Barangsiapa yang memaafkan orang lain,<br>
+      niscaya Allah akan memaafkannya."<br>
+      <strong style="color:var(--gold)">— HR. Bukhari & Muslim</strong>
+    </div>
+    <p class="win-sub" style="margin-top:10px; color: var(--gold); font-size:1.05rem; font-weight:900">
+      🌟 Minal Aidin Wal Faizin 🌟
+    </p>
+  </div>
+</div>
+
+<script>
+  // Stars
+  const sky = document.getElementById('sky');
+  for (let i = 0; i < 90; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = 1 + Math.random() * 2.5;
+    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*85}%;left:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${-Math.random()*5}s;`;
+    sky.appendChild(s);
+  }
+
+  // Floating Ramadan icons
+  const icons = ['🌙','⭐','🕌','✨','🤲','📿','🌟','☪️','🕋'];
+  for (let i = 0; i < 15; i++) {
+    const ic = document.createElement('div');
+    ic.className = 'float-icon';
+    ic.textContent = icons[Math.floor(Math.random()*icons.length)];
+    ic.style.left = Math.random()*100+'vw';
+    ic.style.fontSize = (1.1+Math.random()*1.3)+'rem';
+    ic.style.animationDuration = (8+Math.random()*10)+'s';
+    ic.style.animationDelay = (-Math.random()*14)+'s';
+    sky.appendChild(ic);
+  }
+
+  // No button logic
+  const btnNo   = document.getElementById('btnNo');
+  const char    = document.getElementById('character');
+  const sub     = document.getElementById('subtitle');
+  const prog    = document.getElementById('progressBar');
+  const progPct = document.getElementById('progPct');
+
+  const messages = [
+    "Ini bulan ampunan loh… 😔",
+    "Kata Rasulullah, maaf itu mulia 🤲",
+    "Masa di bulan Ramadan masih ada dendam? 🌙",
+    "Aku udah sholat minta ampun ke Allah, sekarang minta maaf ke kamu 😢",
+    "Sahur-sahur masih nggak mau maafin? 😭",
+    "Aku udah puasa nahan emosi, tolong dong…",
+    "Dosa kita bisa hilang kalau saling memaafkan 🕌",
+    "Yaa Allah, bantuin aku dapet maafnya dia… 🙏",
+    "...maafin aku demi Ramadan yang suci ini ya 🥹",
+  ];
+
+  const charStates = ['😔','😢','😭','🥺','😓','🥹','😿','🙏','🤲'];
+
+  let noCount = 0;
+
+  function initNoBtn() {
+    const r = document.getElementById('mainCard').getBoundingClientRect();
+    btnNo.style.position = 'fixed';
+    btnNo.style.top  = (r.bottom - 65) + 'px';
+    btnNo.style.left = (r.right - 175) + 'px';
+  }
+  initNoBtn();
+
+  function gasMauh() {
+    noCount++;
+    char.className = 'crying';
+    char.textContent = charStates[Math.min(noCount, charStates.length-1)];
+
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const bw = btnNo.offsetWidth + 10, bh = btnNo.offsetHeight + 10;
+
+    btnNo.style.padding = Math.max(5,13-noCount)+'px '+Math.max(12,28-noCount*4)+'px';
+    btnNo.style.fontSize = Math.max(0.6,1.0-noCount*0.05)+'rem';
+
+    const x = Math.random()*(vw-bw-20)+10;
+    const y = Math.random()*(vh-bh-20)+10;
+    btnNo.style.left = x+'px';
+    btnNo.style.top  = y+'px';
+
+    if (noCount <= messages.length) {
+      sub.innerHTML = messages[noCount-1];
+    } else {
+      btnNo.style.display = 'none';
+      sub.innerHTML = "Tombolnya kayak hati yang keras, akhirnya lunak juga…<br>maafin aja ya? 🌙";
+    }
+
+    const pct = Math.max(0, 60-noCount*7);
+    prog.style.width = pct+'%';
+    progPct.textContent = pct+'%';
+  }
+
+  function maafin() {
+    prog.style.width = '100%';
+    progPct.textContent = '100%';
+    char.className = 'happy';
+    char.textContent = '🥰';
+
+    const colors = ['#f5c518','#e6a817','#0d7377','#14a085','#ffffff','#d4a843','#aff4c6','#fef9e7'];
+    for (let i = 0; i < 80; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.background = colors[Math.floor(Math.random()*colors.length)];
+      c.style.left = Math.random()*100+'vw';
+      c.style.top  = Math.random()*20+'vh';
+      c.style.animationDelay = Math.random()*0.6+'s';
+      c.style.width  = (5+Math.random()*9)+'px';
+      c.style.height = (5+Math.random()*9)+'px';
+      c.style.borderRadius = Math.random()>0.5?'50%':'2px';
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(), 2400);
+    }
+
+    const spArr = ['✨','🌟','⭐','🌙','🤲','🕌','💛'];
+    for (let i = 0; i < 14; i++) {
+      setTimeout(()=>{
+        const el = document.createElement('div');
+        el.className = 'sparkle';
+        el.textContent = spArr[Math.floor(Math.random()*spArr.length)];
+        el.style.left = (10+Math.random()*80)+'vw';
+        el.style.top  = (10+Math.random()*60)+'vh';
+        document.body.appendChild(el);
+        setTimeout(()=>el.remove(), 1200);
+      }, i*110);
+    }
+
+    setTimeout(()=>{
+      document.getElementById('main-content').style.display = 'none';
+      btnNo.style.display = 'none';
+      document.getElementById('win-screen').style.display = 'flex';
+    }, 600);
+  }
+
+  // Eid countdown
+  (function(){
+    const eid  = new Date('2025-03-30T00:00:00');
+    const now  = new Date();
+    const diff = Math.ceil((eid-now)/(1000*60*60*24));
+    const strip = document.getElementById('eidStrip');
+    if (diff > 0) {
+      strip.innerHTML = `⏳ Lebaran tinggal <span>${diff} hari</span> lagi — yuk saling maafkan! 🤲`;
+    } else {
+      strip.innerHTML = `🎉 Selamat Hari Raya! <span>Minal Aidin Wal Faizin</span> 🌙`;
+    }
+  })();
+</script>
+</body>
+</html>
